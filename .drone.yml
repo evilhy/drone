@@ -41,8 +41,16 @@ type: docker
 name: private-repository
 
 platform:
-  arch: arm64
+  arch: amd64
   os: linux
+  
+- name: build
+  image: golang:1.14.15
+  commands:
+  - sh scripts/build.sh
+  environment:
+    GOARCH: amd64
+    GOOS: linux
 
 steps: 
  - name: publish-2
