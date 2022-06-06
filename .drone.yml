@@ -61,7 +61,7 @@ steps:
       repo: my.icm.icu:1080/library/devops-demo
       use_cache: true
       username:
-        from_secret: scdocker_username
+        from_secret: docker_username
       password:
-        from_secret: scdocker_password
+        from_secret: docker_password
       tags: ${DRONE_BUILD_NUMBER}
