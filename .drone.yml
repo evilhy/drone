@@ -34,16 +34,22 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-      
-# - name: publish-2
-#    image: plugins/docker
-#    settings:
-#      insecure: true
-#      registry: my.icm.icu:1080
-#      repo: my.icm.icu:1080/library/devops-demo
-#      use_cache: true
-#      username:
-#        from_secret: scdocker_username
-#      password:
-#        from_secret: scdocker_password
-#      tags: ${DRONE_BUILD_NUMBER}
+ 
+---
+kind: pipeline
+type: docker
+name: private repository
+
+steps: 
+ - name: publish-2
+    image: plugins/docker
+    settings:
+      insecure: true
+      registry: my.icm.icu:1080
+      repo: my.icm.icu:1080/library/devops-demo
+      use_cache: true
+      username:
+        from_secret: scdocker_username
+      password:
+        from_secret: scdocker_password
+      tags: ${DRONE_BUILD_NUMBER}
