@@ -1,0 +1,68 @@
+---
+kind: pipeline
+type: docker
+name: linux-amd64
+
+platform:
+  arch: amd64
+  os: linux
+
+steps:
+- name: test
+  image: golang:1.14.15
+  commands:
+  - go test ./...
+  - go build -o /dev/null github.com/drone/drone/cmd/drone-server
+  - go build -o /dev/null -tags "oss nolimit" github.com/drone/drone/cmd/drone-server
+  
+- name: build
+  image: golang:1.14.15
+  commands:
+  - sh scripts/build.sh
+  environment:
+    GOARCH: amd64
+    GOOS: linux
+
+- name: publish
+  image: plugins/docker:18
+  settings:
+    auto_tag: true
+    auto_tag_suffix: linux-amd64-port-3002
+    dockerfile: docker/Dockerfile.server.linux.amd64
+    repo: evilhy/drone
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+ 
+---
+kind: pipeline
+type: docker
+name: private-repository
+
+platform:
+  arch: amd64
+  os: linux
+
+steps: 
+- name: build
+  image: golang:1.14.15
+  commands:
+  - sh scripts/build.sh
+  environment:
+    GOARCH: amd64
+    GOOS: linux
+
+- name: publish-2
+  image: plugins/docker:18
+  settings:
+    dockerfile: docker/Dockerfile.server.linux.amd64
+    insecure: true
+    registry: my.icm.icu:1080
+    repo: my.icm.icu:1080/library/drone
+    use_cache: true
+    username:
+      from_secret: scdocker_username
+    password:
+      from_secret: scdocker_password
+    tags: ${DRONE_BUILD_NUMBER}
