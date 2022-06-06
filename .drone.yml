@@ -27,11 +27,10 @@ steps:
   image: plugins/docker:18
   settings:
     auto_tag: true
-    auto_tag_suffix: linux-amd64
+    auto_tag_suffix: linux-amd64-port-3002
     dockerfile: docker/Dockerfile.server.linux.amd64
     repo: evilhy/drone
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-
