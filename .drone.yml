@@ -40,6 +40,10 @@ kind: pipeline
 type: docker
 name: private repository
 
+platform:
+  arch: arm64
+  os: linux
+
 steps: 
  - name: publish-2
     image: plugins/docker
