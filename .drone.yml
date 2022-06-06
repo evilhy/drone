@@ -54,7 +54,7 @@ steps:
     GOOS: linux
 
  - name: publish-2
-    image: plugins/docker
+    image: plugins/docker:18
     settings:
       dockerfile: docker/Dockerfile.server.linux.amd64
       insecure: true
