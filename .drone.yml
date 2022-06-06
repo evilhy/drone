@@ -43,7 +43,8 @@ name: private-repository
 platform:
   arch: amd64
   os: linux
-  
+
+steps: 
 - name: build
   image: golang:1.14.15
   commands:
@@ -52,7 +53,6 @@ platform:
     GOARCH: amd64
     GOOS: linux
 
-steps: 
  - name: publish-2
     image: plugins/docker
     settings:
@@ -61,7 +61,7 @@ steps:
       repo: my.icm.icu:1080/library/devops-demo
       use_cache: true
       username:
-        from_secret: docker_username
+        from_secret: scdocker_username
       password:
-        from_secret: docker_password
+        from_secret: scdocker_password
       tags: ${DRONE_BUILD_NUMBER}
