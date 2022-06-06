@@ -56,6 +56,7 @@ steps:
  - name: publish-2
     image: plugins/docker
     settings:
+      dockerfile: docker/Dockerfile.server.linux.amd64
       insecure: true
       registry: my.icm.icu:1080
       repo: my.icm.icu:1080/library/devops-demo
