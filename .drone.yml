@@ -53,16 +53,4 @@ steps:
     GOARCH: amd64
     GOOS: linux
 
- - name: publish-2
-    image: plugins/docker:18
-    settings:
-      dockerfile: docker/Dockerfile.server.linux.amd64
-      insecure: true
-      registry: my.icm.icu:1080
-      repo: my.icm.icu:1080/library/devops-demo
-      use_cache: true
-      username:
-        from_secret: scdocker_username
-      password:
-        from_secret: scdocker_password
-      tags: ${DRONE_BUILD_NUMBER}
+
