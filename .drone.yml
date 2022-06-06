@@ -29,7 +29,7 @@ steps:
     auto_tag: true
     auto_tag_suffix: linux-amd64
     dockerfile: docker/Dockerfile.server.linux.amd64
-    repo: evil/drone
+    repo: evilhy/drone
     username:
       from_secret: docker_username
     password:
